@@ -8,11 +8,13 @@ const tile_size: Vector2 = Vector2(16,16)
 #var sprite_node_pos_tween: Tween
 
 @export var stats: EntityStats
-var current_ap: int =0
+var current_ap: int = 0
 var is_my_turn: bool = false
+var movement_buff: int = 0
 
 func _ready() -> void:
 	current_ap = stats.ap
+	movement_buff = stats.movement_speed
 
 
 func action() -> void:
@@ -58,9 +60,14 @@ func _try_move(dir: Vector2) -> void:
 	
 
 func _execute_move(dir:Vector2):
-	current_ap-=1
-	print("Moved. AP left: ", current_ap, " | Noise generated: ", stats.noise)
-	global_position += dir * tile_size
+	if movement_buff>1: 
+		global_position += dir * tile_size
+		movement_buff-=1
+	else:
+		current_ap-=1
+		print("Moved. AP left: ", current_ap, " | Noise generated: ", stats.noise)
+		global_position += dir * tile_size
+		movement_buff = stats.movement_speed
 	#$Sprite2D.global_position -= dir * tile_size
 	
 	#if sprite_node_pos_tween:
