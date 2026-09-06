@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://bsp31bcdw82ey"]
 
-[ext_resource type="Script" uid="uid://cb4w7s03ib1tq" path="res://Scripts/enemy.gd" id="1_m1htj"]
+[ext_resource type="Script" uid="uid://cb4w7s03ib1tq" path="res://scripts/enemy.gd" id="1_m1htj"]
+[ext_resource type="Texture2D" uid="uid://ch2jar3n7rvgm" path="res://assets/world test/Simple_Chess_by_skyel/Black Pieces/spr_bishop_black.png" id="2_55jtl"]
 
-[node name="Enemy" type="Node2D" unique_id=2024059928]
+[node name="Enemy" type="CharacterBody2D" unique_id=172947941]
 script = ExtResource("1_m1htj")
-patrol_point = null
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=27852815]
+z_index = 1
+texture_filter = 1
+texture = ExtResource("2_55jtl")
+offset = Vector2(1, -1)
