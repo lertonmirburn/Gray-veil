@@ -3,19 +3,25 @@ class_name Player
 
 signal end_turn
 
-
-const tile_size: Vector2 = Vector2(16,16)
+const TILE_SIZE: Vector2 = Vector2(32,32)
 #var sprite_node_pos_tween: Tween
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var stats: EntityStats
 var current_ap: int = 0
 var is_my_turn: bool = false
 var movement_buff: int = 0
 
+#var grid_pos: Vector2i
+
 func _ready() -> void:
 	current_ap = stats.ap
 	movement_buff = stats.movement_speed
-
+	
+	#grid_pos = Vector2i(
+		#global_position / TILE_SIZE
+	#)
 
 func action() -> void:
 	if stats:
@@ -35,15 +41,21 @@ func _unhandled_input(event: InputEvent) -> void:
 	#if Input.is_action_just_pressed("ui_up") and !$up.is_colliding():
 	if Input.is_action_just_pressed("ui_up"):
 		dir = Vector2(0,-1)
+		animated_sprite_2d.play("idle_back")
 	#elif Input.is_action_just_pressed("ui_down") and !$down.is_colliding():
-	if Input.is_action_just_pressed("ui_down"):	
+	elif Input.is_action_just_pressed("ui_down"):	
 		dir = Vector2(0,1)
+		animated_sprite_2d.play("idle_front")
 	#elif Input.is_action_just_pressed("ui_left") and !$left.is_colliding():
 	elif Input.is_action_just_pressed("ui_left"):
 		dir = Vector2(-1,0)
+		animated_sprite_2d.flip_h = dir.x < 0
+		animated_sprite_2d.play("idle_right")
 	#elif Input.is_action_just_pressed("ui_right") and !$right.is_colliding():
 	elif Input.is_action_just_pressed("ui_right"):	
 		dir = Vector2(1,0)
+		animated_sprite_2d.flip_h = false
+		animated_sprite_2d.play("idle_right")
 		
 	if dir != Vector2.ZERO:
 		get_viewport().set_input_as_handled() 
@@ -51,7 +63,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		
 func _try_move(dir: Vector2) -> void:
-	if test_move(global_transform, dir * tile_size):
+	if test_move(global_transform, dir * TILE_SIZE):
 		print("Bonk! Wall detected.")
 		return
 	else:
@@ -61,12 +73,12 @@ func _try_move(dir: Vector2) -> void:
 
 func _execute_move(dir:Vector2):
 	if movement_buff>1: 
-		global_position += dir * tile_size
+		global_position += dir * TILE_SIZE
 		movement_buff-=1
 	else:
 		current_ap-=1
 		print("Moved. AP left: ", current_ap, " | Noise generated: ", stats.noise)
-		global_position += dir * tile_size
+		global_position += dir * TILE_SIZE
 		movement_buff = stats.movement_speed
 	#$Sprite2D.global_position -= dir * tile_size
 	
