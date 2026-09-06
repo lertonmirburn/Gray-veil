@@ -4,3 +4,4 @@
 
 [node name="Enemy" type="Node2D" unique_id=2024059928]
 script = ExtResource("1_m1htj")
+patrol_point = null
