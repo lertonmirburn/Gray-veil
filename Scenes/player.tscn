@@ -1,40 +1,20 @@
 [gd_scene format=3 uid="uid://crwxeyhj0ntnt"]
 
 [ext_resource type="Texture2D" uid="uid://bdb0et8nhik23" path="res://icon.svg" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://Scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Resource" uid="uid://cp763wadyd61i" path="res://Resources/player_stats.tres" id="2_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
 size = Vector2(11, 12.5)
 
 [node name="Player" type="CharacterBody2D" unique_id=889161630]
-position = Vector2(12, 4)
 script = ExtResource("1_onrkg")
+stats = ExtResource("2_6t5aa")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=55194136]
-position = Vector2(0, 1)
 scale = Vector2(0.09765626, 0.10937503)
 texture = ExtResource("1_4flbx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1644672056]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_bhunq")
-
-[node name="up" type="RayCast2D" parent="." unique_id=522855413]
-position = Vector2(0, -8)
-target_position = Vector2(0, -8)
-hit_from_inside = true
-
-[node name="down" type="RayCast2D" parent="." unique_id=222999279]
-position = Vector2(0, 8)
-target_position = Vector2(0, 8)
-hit_from_inside = true
-
-[node name="left" type="RayCast2D" parent="." unique_id=885912521]
-position = Vector2(-8, 0)
-target_position = Vector2(-8, 0)
-hit_from_inside = true
-
-[node name="right" type="RayCast2D" parent="." unique_id=1606846771]
-position = Vector2(8, 0)
-target_position = Vector2(8, 0)
-hit_from_inside = true

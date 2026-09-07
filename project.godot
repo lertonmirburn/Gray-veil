@@ -11,13 +11,10 @@ config_version=5
 [application]
 
 config/name="Gray Veil"
-run/main_scene="uid://co5hky8lvt8gt"
+config/tags=PackedStringArray("gamejam")
+run/main_scene="uid://crwxeyhj0ntnt"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
-
-[autoload]
-
-BusStage="*uid://b1h1cjk4822kj"
 
 [display]
 
