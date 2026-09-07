@@ -4,6 +4,7 @@ class_name Enemy
 signal enemy_turn_finished
 
 const TILE_SIZE: float = 16.0
+const tile_size: Vector2=Vector2(16,16)
 
 @export var stats: EntityStats
 @export var patrol_point: Array[Vector2i] = []
@@ -20,8 +21,9 @@ var last_dir: Vector2i = Vector2i.ZERO
 @export var stage_mg: Stage_management
 
 func _ready() -> void:
-	global_position = global_position.snapped(Vector2(TILE_SIZE, TILE_SIZE))
-	grid_pos = Vector2i(int(global_position.x / TILE_SIZE), int(global_position.y / TILE_SIZE))
+	var tile_coord = (global_position / tile_size).floor()
+	global_position = (tile_coord * tile_size) + (tile_size / 2.0) + Vector2(0,1) 
+	grid_pos = Vector2i(tile_coord)
 
 func initialize(stage_management: Stage_management) -> void:
 	stage_mg = stage_management
@@ -40,6 +42,7 @@ func action(current_weather: Stage_management.WEATHER) -> void:
 		Stage_management.WEATHER.FOG:
 			await behavior_foggy()
 		Stage_management.WEATHER.CLEAR:
+			print("1")
 			await behavier_clear_sky()
 	end_turn()
 

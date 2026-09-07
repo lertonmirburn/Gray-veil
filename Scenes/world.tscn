@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://deqkip5s22ykq"]
 
-[ext_resource type="Script" uid="uid://csocufugde7uv" path="res://scripts/StageManagement.gd" id="1_nnsk1"]
-[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://scenes/Enemy.tscn" id="2_4wyf3"]
+[ext_resource type="Script" uid="uid://csocufugde7uv" path="res://Scripts/StageManagement.gd" id="1_nnsk1"]
+[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://Scenes/Enemy.tscn" id="2_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://cu1ijglvhiuev" path="res://assets/world test/Simple_Chess_by_skyel/Board/spr_board_02.png" id="2_71j4m"]
-[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="3_k0juu"]
-[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://scenes/player.tscn" id="5_qfnet"]
+[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://Scripts/EntityStats.gd" id="3_k0juu"]
+[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://Scenes/player.tscn" id="5_qfnet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i7141"]
 texture = ExtResource("2_71j4m")
@@ -178,13 +178,15 @@ sources/0 = SubResource("TileSetAtlasSource_4mrxx")
 script = ExtResource("3_k0juu")
 metadata/_custom_type_script = "uid://ds0s1gcj1oy7t"
 
-[node name="World" type="Node2D" unique_id=1154908512 node_paths=PackedStringArray("player", "tile_floor", "tile_wall")]
+[node name="World" type="Node2D" unique_id=1154908512 node_paths=PackedStringArray("player", "enemies", "tile_floor", "tile_wall")]
 script = ExtResource("1_nnsk1")
 player = NodePath("Player")
+enemies = [NodePath("Enemy")]
 map_width = 8
 map_height = 6
 tile_floor = NodePath("Floor_layer")
 tile_wall = NodePath("Wall_layer")
+current_state = 1
 
 [node name="Floor_layer" type="TileMapLayer" parent="." unique_id=1447482499]
 z_index = -1
@@ -197,9 +199,14 @@ tile_map_data = PackedByteArray("AAABAP3/AAAFAAQAAAABAP7/AAAFAAQAAAADAPv/AAAFAAQ
 tile_set = SubResource("TileSet_dqkch")
 
 [node name="Enemy" parent="." unique_id=172947941 node_paths=PackedStringArray("stage_mg") instance=ExtResource("2_4wyf3")]
-position = Vector2(24, -72)
+position = Vector2(24, -71)
 stats = SubResource("Resource_jpyye")
+patrol_point = Array[Vector2i]([Vector2i(3, 0)])
 stage_mg = NodePath("..")
 
 [node name="Player" parent="." unique_id=889161630 instance=ExtResource("5_qfnet")]
-position = Vector2(40, -8)
+position = Vector2(72, -7)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1721868400]
+position = Vector2(62, -39)
+zoom = Vector2(3, 3)

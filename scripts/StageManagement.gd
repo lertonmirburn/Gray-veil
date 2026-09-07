@@ -35,7 +35,6 @@ func _ready() -> void:
 	#2
 	BusStage.player_died.connect(_on_player_died)
 	BusStage.enemy_die.connect(_on_enemy_died)
-	
 	init_grid(map_width, map_height)
 	init_actor()
 	game_start()
@@ -72,6 +71,7 @@ func init_actor() -> void:
 	#3
 	if player:
 			player.stage_mg = self
+			print(player.grid_pos)
 			mark_entity(player,player.grid_pos)
 	for enemy in enemies:
 		if is_instance_valid(enemy):
@@ -89,7 +89,6 @@ func game_loop() -> void:
 		#4
 		player.action()
 		await player.end_turn
-		
 		if current_state == STATE.WINNING or current_state == STATE.GAME_OVER:
 			break
 			
