@@ -63,7 +63,7 @@ func _execute_move(dir:Vector2):
 		movement_buff-=1
 	else:
 		current_ap-=1
-		print("Moved. AP left: ", current_ap, " | Noise generated: ", stats.noise)
+		print("Moved. AP left: ", current_ap, " | Noise generated: ", stats.movement_noise)
 		global_position += dir * tile_size
 		movement_buff = stats.movement_speed
 	#$Sprite2D.global_position -= dir * tile_size
