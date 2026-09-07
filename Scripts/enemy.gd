@@ -82,14 +82,7 @@ func attack(target: Player) -> void:
 	await get_tree().create_timer(0.2).timeout
 
 func behavior_foggy() -> void:
-	if has_target:
-		if grid_pos == pos_save:
-			has_target = false
-			await random_move()
-		else:
-			await chase_or_attack_target(pos_save)
-	else:
-		await random_move()
+	pass
 
 func behavier_clear_sky() -> void:
 	if not (stage_mg and stage_mg.astar):

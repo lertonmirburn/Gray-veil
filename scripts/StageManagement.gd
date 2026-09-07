@@ -2,7 +2,7 @@ extends Node
 class_name Stage_management
 
 const TILE_SIZE: float = 16.0
-
+#1
 @export var player: Player
 @export var enemies: Array[Enemy] = []
 @export var current_weather: WEATHER = WEATHER.CLEAR
@@ -32,13 +32,14 @@ enum WEATHER {
 @export var current_state: STATE = STATE.TURN_PLAYER
 
 func _ready() -> void:
+	#2
 	BusStage.player_died.connect(_on_player_died)
 	BusStage.enemy_die.connect(_on_enemy_died)
 	
 	init_grid(map_width, map_height)
 	init_actor()
 	game_start()
-
+	game_loop()
 
 func init_grid(_w: int = 0, _h: int = 0) -> void:
 	if not tile_floor:
@@ -68,11 +69,10 @@ func init_grid(_w: int = 0, _h: int = 0) -> void:
 			astar.set_point_solid(cell, false)
 
 func init_actor() -> void:
+	#3
 	if player:
-		player.stage_mg = self
-
-		mark_entity(player, player.grid_pos)
-		
+			player.stage_mg = self
+			mark_entity(player,player.grid_pos)
 	for enemy in enemies:
 		if is_instance_valid(enemy):
 			enemy.initialize(self)
@@ -86,6 +86,7 @@ func game_start() -> void:
 func game_loop() -> void:
 	while current_state != STATE.WINNING and current_state != STATE.GAME_OVER:
 		current_state = STATE.TURN_PLAYER
+		#4
 		player.action()
 		await player.end_turn
 		
