@@ -28,10 +28,13 @@ func action() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_my_turn or current_ap <= 0 :
+		BusStage.player_end_turn.emit()
 		return
 	if event.is_action_pressed("ui_accept"):
 		current_ap = stats.ap
+		is_my_turn=false
 		print("Turn Ended. AP Refreshed!")
+		BusStage.player_end_turn.emit()
 		return
 	#if current_ap <= 0 :
 		#return
@@ -96,7 +99,7 @@ func _execute_move(dir:Vector2):
 	
 	if current_ap <=0:
 		is_my_turn=false
-		end_turn.emit()
+		BusStage.player_end_turn.emit()
 		
 func die() -> void:
 	BusStage.player_died.emit()
