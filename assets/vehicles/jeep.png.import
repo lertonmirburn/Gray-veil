@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cje3c16iyct3n"
-path="res://.godot/imported/fog01.png-62c1ea487851b63dbef3f0b69f7e05a0.ctex"
+uid="uid://bjip3h6pythpl"
+path="res://.godot/imported/jeep.png-4ff5638d9772968c0181d7c430911707.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fog01.png"
-dest_files=["res://.godot/imported/fog01.png-62c1ea487851b63dbef3f0b69f7e05a0.ctex"]
+source_file="res://assets/vehicles/jeep.png"
+dest_files=["res://.godot/imported/jeep.png-4ff5638d9772968c0181d7c430911707.ctex"]
 
 [params]
 

@@ -24,19 +24,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_riqys"]
-size = Vector2(16, 18)
+size = Vector2(16, 16)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=172947941]
 script = ExtResource("1_mpr68")
 stats = SubResource("Resource_qhqgy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1214884076]
-position = Vector2(-10, -8)
+position = Vector2(-10, -9)
 scale = Vector2(0.605, 0.605)
 sprite_frames = SubResource("SpriteFrames_bhunq")
 frame_progress = 0.09958546
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1419341061]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_riqys")
