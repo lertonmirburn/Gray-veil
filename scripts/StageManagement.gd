@@ -1,7 +1,7 @@
 extends Node2D
 class_name Stage_management
 
-const TILE_SIZE: float = 16.0
+const TILE_SIZE: float = 32
 #1
 @export var player: Player
 @export var enemies: Array[Enemy] = []

@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b56o2p3vsdyc2"]
+
+[ext_resource type="FontFile" uid="uid://bj36fkcjco66h" path="res://assets/font_Pix3M_ccby/alagard_by_pix3m-d6awiwp.ttf" id="1_jb1p3"]
+[ext_resource type="FontFile" uid="uid://dxogm5ag3etft" path="res://assets/font_Pix3M_ccby/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="2_1tm0t"]
+
+[sub_resource type="Theme" id="Theme_orua6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34wtv"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.243, 0.2682, 0.27, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jpyye"]
+font = ExtResource("1_jb1p3")
+font_size = 93
+font_color = Color(1, 0, 0, 1)
+
+[node name="GameOverScreen" type="CanvasLayer" unique_id=1724695644]
+
+[node name="Panel Container" type="PanelContainer" parent="." unique_id=1858821000]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_orua6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_34wtv")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel Container" unique_id=1911374300]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel Container/MarginContainer" unique_id=411489915]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="Panel Container/MarginContainer/VBoxContainer" unique_id=748046096]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Game Over"
+label_settings = SubResource("LabelSettings_jpyye")
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel Container/MarginContainer/VBoxContainer" unique_id=507775410]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel Container/MarginContainer/VBoxContainer/CenterContainer" unique_id=1911869422]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Button" type="Button" parent="Panel Container/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer" unique_id=2092374746]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_1tm0t")
+theme_override_font_sizes/font_size = 36
+text = "RESTART"
+
+[node name="Button2" type="Button" parent="Panel Container/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer" unique_id=345242092]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_1tm0t")
+theme_override_font_sizes/font_size = 36
+text = "RETURN TO MENU"

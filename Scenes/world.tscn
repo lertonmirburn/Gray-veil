@@ -66,6 +66,7 @@ texture = ExtResource("2_71j4m")
 6:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_qhqgy"]
+tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_i7141")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4mrxx"]
@@ -172,10 +173,12 @@ texture = ExtResource("2_71j4m")
 9:9/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_dqkch"]
+tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_4mrxx")
 
 [sub_resource type="Resource" id="Resource_jpyye"]
 script = ExtResource("3_k0juu")
+ap = 4
 metadata/_custom_type_script = "uid://ds0s1gcj1oy7t"
 
 [node name="World" type="Node2D" unique_id=1154908512 node_paths=PackedStringArray("player", "enemies", "tile_floor", "tile_wall")]
@@ -199,10 +202,10 @@ tile_map_data = PackedByteArray("AAABAP3/AAAFAAQAAAABAP7/AAAFAAQAAAADAPv/AAAFAAQ
 tile_set = SubResource("TileSet_dqkch")
 
 [node name="Player" parent="." unique_id=889161630 instance=ExtResource("5_qfnet")]
-position = Vector2(72, -7)
+position = Vector2(119, -11)
 
 [node name="Enemy" parent="." unique_id=172947941 node_paths=PackedStringArray("stage_mg") instance=ExtResource("2_4wyf3")]
-position = Vector2(32, -64)
+position = Vector2(114, -94)
 stats = SubResource("Resource_jpyye")
 patrol_point = Array[Vector2i]([Vector2i(3, 0)])
 stage_mg = NodePath("..")

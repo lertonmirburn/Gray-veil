@@ -15,5 +15,5 @@ stats = SubResource("Resource_qhqgy")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=27852815]
 z_index = 1
 texture_filter = 1
-position = Vector2(8, 8)
+position = Vector2(16, 16)
 texture = ExtResource("2_55jtl")
