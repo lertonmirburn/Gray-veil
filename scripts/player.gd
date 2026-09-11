@@ -26,6 +26,8 @@ func _ready() -> void:
 	grid_pos = Vector2i(tile_coord)
 	
 	hitbox_offset = hitbox.position
+	hitbox.monitoring = false
+	update_hitbox_offset()
 	
 
 
@@ -113,11 +115,11 @@ func _process(delta: float) -> void:
 # COLLISION DETECTION
 #-------------------------------------------------------------------------------
 func _try_move(dir: Vector2) -> void:
-	if test_move(global_transform, dir * tile_size):
-		print("Bonk! Wall detected.")
-		return
-	else:
-		print("Can move")
+	#if test_move(global_transform, dir * tile_size):
+		#print("Bonk! Wall detected.")
+		#return
+	#else:
+		#print("Can move")
 	var target_grid_pos = grid_pos + Vector2i(dir)
 	if stage_mg and stage_mg.astar:
 		if not stage_mg.astar.is_in_boundsv(target_grid_pos):
@@ -175,6 +177,8 @@ func attack() -> void:
 	hitbox.monitoring = true
 	play_animation("attack",last_direction)
 	await animated_sprite_2d.animation_finished
+	current_ap-=1
+	print("Attacked ! AP left :", current_ap)
 	hitbox.monitoring = false
 	is_attacking = false
 	play_animation("idle", last_direction)
@@ -199,6 +203,9 @@ func update_hitbox_offset() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if is_attacking and body.name.begins_with("Enemy"):
 		print("Player hit the enemy")
+		print(body)
+		BusStage.enemy_die.emit(body)
+		
 #-------------------------------------------------------------------------------
 # DEATH
 #-------------------------------------------------------------------------------

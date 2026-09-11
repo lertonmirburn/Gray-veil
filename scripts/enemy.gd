@@ -90,6 +90,9 @@ func random_move() -> void:
 func attack(target: Player) -> void:
 	
 	await get_tree().create_timer(0.2).timeout
+	
+	if is_instance_valid(target):
+		target.die()
 
 func behavior_foggy() -> void:
 	pass

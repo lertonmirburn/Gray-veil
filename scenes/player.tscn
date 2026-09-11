@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crwxeyhj0ntnt"]
 
-[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://Scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Resource" uid="uid://cp763wadyd61i" path="res://Resources/player_stats.tres" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bo2opb6c0fln4" path="res://assets/entity/fog-prisoner.png" id="3_qlg0r"]
 
@@ -169,6 +169,7 @@ stats = ExtResource("2_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1644672056]
 position = Vector2(0, -0.5625)
+scale = Vector2(0.96658623, 0.96658623)
 shape = SubResource("RectangleShape2D_bhunq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=53729916]
@@ -177,7 +178,7 @@ sprite_frames = SubResource("SpriteFrames_bhunq")
 animation = &"aim_back"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1794323306]
-position = Vector2(16, 0)
+position = Vector2(15, 0)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=529227633]

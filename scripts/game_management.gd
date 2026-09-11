@@ -9,11 +9,12 @@ class_name GameManager
 var current_stage_node: Node = null
 
 func _ready() -> void:
-
 	BusStage.battle_won.connect(_on_battle_won)
 	BusStage.battle_lost.connect(_on_battle_lost)
-	
-	if BusStage.current_stage<2:
+	if BusStage.current_stage==3:
+		BusStage.current_stage=0
+		current_stage_node=null	
+	if BusStage.current_stage<=2:
 		load_stage(stages[BusStage.current_stage])
 func load_stage(stage_to_load: PackedScene) -> void:
 	if is_instance_valid(current_stage_node):

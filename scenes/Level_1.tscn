@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://ndnp3sj6l7ag"]
 
-[ext_resource type="Script" uid="uid://csocufugde7uv" path="res://scripts/StageManagement.gd" id="1_d6w1m"]
-[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://scenes/Enemy.tscn" id="2_kjrqm"]
-[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://scenes/player.tscn" id="5_rp28y"]
-[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="6_crfhr"]
+[ext_resource type="Script" uid="uid://csocufugde7uv" path="res://Scripts/StageManagement.gd" id="1_d6w1m"]
+[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://Scenes/Enemy.tscn" id="2_kjrqm"]
+[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://Scenes/player.tscn" id="5_rp28y"]
+[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://Scripts/EntityStats.gd" id="6_crfhr"]
 [ext_resource type="Texture2D" uid="uid://c5omsxcnggbq0" path="res://assets/tiles/Cliff_Tile.png" id="7_a4osw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qrchm"]
@@ -158,12 +158,14 @@ script = ExtResource("6_crfhr")
 ap = 4
 metadata/_custom_type_script = "uid://ds0s1gcj1oy7t"
 
-[node name="Level_1" type="Node2D" unique_id=1154908512 node_paths=PackedStringArray("player", "enemies")]
+[node name="Level_1" type="Node2D" unique_id=1154908512 node_paths=PackedStringArray("player", "enemies", "tile_floor", "tile_wall")]
 script = ExtResource("1_d6w1m")
 player = NodePath("Player")
 enemies = [NodePath("Enemy"), NodePath("Enemy2")]
 map_width = 16
 map_height = 19
+tile_floor = NodePath("Floor_layer")
+tile_wall = NodePath("Wall_layer")
 current_state = 1
 
 [node name="Enemy2" parent="." unique_id=172947941 instance=ExtResource("2_kjrqm")]

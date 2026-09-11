@@ -95,6 +95,7 @@ func game_loop() -> void:
 		player.action()
 		await BusStage.player_end_turn
 		if current_state == STATE.WINNING or current_state == STATE.GAME_OVER:
+			print(current_state)
 			break
 			
 
@@ -127,12 +128,16 @@ func swap_weather() -> void:
 func _on_player_died() -> void:
 	current_state = STATE.GAME_OVER
 	if is_instance_valid(player):
+		unmark_entity(player.grid_pos)
 		player.set_process_unhandled_input(false)
 		BusStage.battle_lost.emit()
 		return
 
 func _on_enemy_died(enemy_die: Enemy) -> void:
+	print("Erasing :", enemy_die)
 	enemies.erase(enemy_die)
+	if(enemy_die):
+		print(enemy_die)
 	if enemies.is_empty():
 		current_state = STATE.WINNING
 		BusStage.battle_won.emit()
@@ -161,6 +166,7 @@ func get_entity_grid_pos(entity: Node2D) -> Vector2i:
 func end_battle() -> void:
 	match current_state:
 		STATE.WINNING:
+			print("We won")
 			BusStage.battle_lost.emit()
 			pass
 		STATE.GAME_OVER:

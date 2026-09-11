@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://bi4w4n0i5x1kc"]
 
-[ext_resource type="Script" uid="uid://csocufugde7uv" path="res://scripts/StageManagement.gd" id="1_wl4sj"]
-[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://scenes/Enemy.tscn" id="2_knhd3"]
-[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://scenes/player.tscn" id="5_3v32c"]
-[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="6_181jq"]
+[ext_resource type="Script" uid="uid://csocufugde7uv" path="res://Scripts/StageManagement.gd" id="1_wl4sj"]
+[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://Scenes/Enemy.tscn" id="2_knhd3"]
+[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://Scenes/player.tscn" id="5_3v32c"]
+[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://Scripts/EntityStats.gd" id="6_181jq"]
 
 [sub_resource type="Resource" id="Resource_jpyye"]
 script = ExtResource("6_181jq")
@@ -160,12 +160,14 @@ sources/0 = SubResource("TileSetAtlasSource_31gu5")
 sources/2 = SubResource("TileSetAtlasSource_apmy2")
 sources/3 = SubResource("TileSetAtlasSource_vkavj")
 
-[node name="Level_2" type="Node2D" unique_id=1154908512 node_paths=PackedStringArray("player", "enemies")]
+[node name="Level_2" type="Node2D" unique_id=1154908512 node_paths=PackedStringArray("player", "enemies", "tile_floor", "tile_wall")]
 script = ExtResource("1_wl4sj")
 player = NodePath("Player")
-enemies = [NodePath("Enemy"), NodePath("Enemy2")]
+enemies = [NodePath("Enemy"), NodePath("Enemy2"), NodePath("Enemy4"), NodePath("Enemy3")]
 map_width = 27
 map_height = 19
+tile_floor = NodePath("Floor_layer")
+tile_wall = NodePath("Wall_layer")
 current_state = 1
 
 [node name="Enemy4" parent="." unique_id=172947941 instance=ExtResource("2_knhd3")]
