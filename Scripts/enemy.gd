@@ -90,7 +90,6 @@ func attack(target: Player) -> void:
 	await get_tree().create_timer(0.2).timeout
 
 func behavior_foggy() -> void:
-	
 	pass
 func behavier_clear_sky() -> void:
 	if not (stage_mg and stage_mg.astar):
