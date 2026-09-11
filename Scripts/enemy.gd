@@ -3,8 +3,8 @@ class_name Enemy
 
 
 
-const TILE_SIZE: float = 32.0
-const tile_size: Vector2=Vector2(32,32)
+const TILE_SIZE: float = 16.0
+const tile_size: Vector2=Vector2(16,16)
 
 @export var stats: EntityStats
 @export var patrol_point: Array[Vector2i] = []
@@ -22,7 +22,7 @@ var current_ap:int
 
 func _ready() -> void:
 	var tile_coord = (global_position / tile_size).floor()
-	global_position = (tile_coord * tile_size)
+	global_position = (tile_coord * tile_size) + (tile_size / 2.0)
 	grid_pos = Vector2i(tile_coord)
 
 func initialize(stage_management: Stage_management) -> void:
@@ -55,7 +55,9 @@ func move(target_cell: Vector2i) -> void:
 	var old_cell: Vector2i = grid_pos
 	grid_pos = target_cell
 	
-	var target_pixel: Vector2 = Vector2(target_cell.x * TILE_SIZE, target_cell.y * TILE_SIZE)
+	
+	var target_pixel: Vector2 = (Vector2(target_cell) * TILE_SIZE) + Vector2(TILE_SIZE / 2.0, TILE_SIZE / 2.0)
+	
 	var tween: Tween = create_tween()
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.tween_property(self, "global_position", target_pixel, 0.185).set_trans(Tween.TRANS_SINE)

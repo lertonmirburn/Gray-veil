@@ -9,7 +9,7 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jpyye"]
 font = ExtResource("2_jrum5")
-font_size = 40
+font_size = 93
 font_color = Color(0, 1, 0, 1)
 
 [node name="WinScreen" type="CanvasLayer" unique_id=1491334614]
@@ -52,13 +52,13 @@ alignment = 1
 [node name="Continue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=2043690777]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_f4f3g")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 36
 text = "CONTINUE"
 
 [node name="Return_menu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1714576397]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_f4f3g")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 36
 text = "RETURN TO MAIN MENU"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed"]

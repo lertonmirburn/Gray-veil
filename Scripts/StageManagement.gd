@@ -1,7 +1,7 @@
 extends Node2D
 class_name Stage_management
 
-const TILE_SIZE: float = 16.0
+const TILE_SIZE: float = 16
 #1
 @export var player: Player
 @export var enemies: Array[Enemy] = []
@@ -99,6 +99,7 @@ func game_loop() -> void:
 			
 
 		current_state = STATE.TURN_ENEMY
+		
 		for enemy in enemies.duplicate():
 			if not is_instance_valid(enemy):
 				continue
@@ -127,11 +128,14 @@ func _on_player_died() -> void:
 	current_state = STATE.GAME_OVER
 	if is_instance_valid(player):
 		player.set_process_unhandled_input(false)
+		BusStage.battle_lost.emit()
+		return
 
 func _on_enemy_died(enemy_die: Enemy) -> void:
 	enemies.erase(enemy_die)
 	if enemies.is_empty():
 		current_state = STATE.WINNING
+		BusStage.battle_won.emit()
 
 
 func mark_entity(entity: Node, cell: Vector2i) -> void:
@@ -157,36 +161,38 @@ func get_entity_grid_pos(entity: Node2D) -> Vector2i:
 func end_battle() -> void:
 	match current_state:
 		STATE.WINNING:
+			BusStage.battle_lost.emit()
 			pass
 		STATE.GAME_OVER:
+			BusStage.battle_lost.emit()
 			pass
 			
 			
 			
 			
-func _process(_delta: float) -> void:
-	if show_debug_grid:
-		queue_redraw()
-func _draw() -> void:
-	if not show_debug_grid or not astar:
-		return
-		
-	var region: Rect2i = astar.region
-	for x in range(region.position.x, region.end.x):
-		for y in range(region.position.y, region.end.y):
-			var cell: Vector2i = Vector2i(x, y)
-			var draw_rect: Rect2 = Rect2(Vector2(cell) * TILE_SIZE, Vector2(TILE_SIZE, TILE_SIZE))
-			
-			if astar.is_point_solid(cell):
-				if valid_move.has(cell) and valid_move[cell] != null:
-					# Ô ĐỎ ĐẬM: Ô sàn hợp lệ nhưng đang CÓ THỰC THỂ ĐỨNG
-					draw_rect(draw_rect, Color(1, 0, 0, 0.55), true)
-				else:
-					# Ô XÁM TỐI: Tường hoặc Vực thẳm ngoài map
-					draw_rect(draw_rect, Color(0.1, 0.1, 0.1, 0.4), true)
-			else:
-				# Ô XANH LÁ: Ô sàn trống đi được
-				draw_rect(draw_rect, Color(0, 1, 0, 0.25), true)
-			
-			# Viền mỏng phân cách từng ô
-			draw_rect(draw_rect, Color(1, 1, 1, 0.15), false, 1.0)
+#func _process(_delta: float) -> void:
+	#if show_debug_grid:
+		#queue_redraw()
+#func _draw() -> void:
+	#if not show_debug_grid or not astar:
+		#return
+		#
+	#var region: Rect2i = astar.region
+	#for x in range(region.position.x, region.end.x):
+		#for y in range(region.position.y, region.end.y):
+			#var cell: Vector2i = Vector2i(x, y)
+			#var draw_rect: Rect2 = Rect2(Vector2(cell) * TILE_SIZE, Vector2(TILE_SIZE, TILE_SIZE))
+			#
+			#if astar.is_point_solid(cell):
+				#if valid_move.has(cell) and valid_move[cell] != null:
+					## Ô ĐỎ ĐẬM: Ô sàn hợp lệ nhưng đang CÓ THỰC THỂ ĐỨNG
+					#draw_rect(draw_rect, Color(1, 0, 0, 0.55), true)
+				#else:
+					## Ô XÁM TỐI: Tường hoặc Vực thẳm ngoài map
+					#draw_rect(draw_rect, Color(0.1, 0.1, 0.1, 0.4), true)
+			#else:
+				## Ô XANH LÁ: Ô sàn trống đi được
+				#draw_rect(draw_rect, Color(0, 1, 0, 0.25), true)
+			#
+			## Viền mỏng phân cách từng ô
+			#draw_rect(draw_rect, Color(1, 1, 1, 0.15), false, 1.0)
