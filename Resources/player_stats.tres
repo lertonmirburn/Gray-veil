@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EntityStats" format=3 uid="uid://cp763wadyd61i"]
 
-[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://Scripts/EntityStats.gd" id="1_1kv1s"]
+[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="1_1kv1s"]
 [ext_resource type="Texture2D" uid="uid://bdb0et8nhik23" path="res://icon.svg" id="1_yhl7x"]
 
 [resource]

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b56o2p3vsdyc2"]
 
 [ext_resource type="Script" uid="uid://hic2qt4ael0p" path="res://scripts/game_over_screen.gd" id="1_1tm0t"]
-[ext_resource type="FontFile" uid="uid://bj36fkcjco66h" path="res://assets/font_Pix3M_ccby/alagard_by_pix3m-d6awiwp.ttf" id="1_jb1p3"]
-[ext_resource type="FontFile" uid="uid://dxogm5ag3etft" path="res://assets/font_Pix3M_ccby/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="2_1tm0t"]
+[ext_resource type="FontFile" uid="uid://bj36fkcjco66h" path="res://assets/font_Pix3M_ccby/alagard_by_pix3m-d6awiwp.ttf" id="2_qo38o"]
+[ext_resource type="FontFile" uid="uid://dxogm5ag3etft" path="res://assets/font_Pix3M_ccby/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="3_v2h4q"]
 
 [sub_resource type="Theme" id="Theme_orua6"]
 
@@ -15,7 +15,7 @@ border_width_bottom = 5
 border_color = Color(0.243, 0.2682, 0.27, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jpyye"]
-font = ExtResource("1_jb1p3")
+font = ExtResource("2_qo38o")
 font_size = 93
 font_color = Color(1, 0, 0, 1)
 
@@ -61,13 +61,13 @@ theme_override_constants/separation = 30
 [node name="Restart_button" type="Button" parent="Panel Container/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer" unique_id=2092374746]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("2_1tm0t")
+theme_override_fonts/font = ExtResource("3_v2h4q")
 theme_override_font_sizes/font_size = 36
 text = "RESTART"
 
 [node name="Return_button" type="Button" parent="Panel Container/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer" unique_id=345242092]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_1tm0t")
+theme_override_fonts/font = ExtResource("3_v2h4q")
 theme_override_font_sizes/font_size = 36
 text = "RETURN TO MENU"
 

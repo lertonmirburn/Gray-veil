@@ -1,14 +1,14 @@
 [gd_scene format=4 uid="uid://deqkip5s22ykq"]
 
 [ext_resource type="Script" uid="uid://csocufugde7uv" path="res://scripts/StageManagement.gd" id="1_d6w1m"]
-[ext_resource type="Texture2D" uid="uid://dwedb0mxe7ldx" path="res://assets/FieldsTileset.png" id="2_kjrqm"]
-[ext_resource type="Texture2D" uid="uid://f7fsuckynl4c" path="res://Resources/Sprites/Walls.png" id="3_d6w1m"]
-[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://scenes/player.tscn" id="4_f63rn"]
-[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://scenes/Enemy.tscn" id="5_rp28y"]
+[ext_resource type="PackedScene" uid="uid://bsp31bcdw82ey" path="res://scenes/Enemy.tscn" id="2_kjrqm"]
+[ext_resource type="Texture2D" uid="uid://dwedb0mxe7ldx" path="res://assets/FieldsTileset.png" id="3_bmqp6"]
+[ext_resource type="Texture2D" uid="uid://f7fsuckynl4c" path="res://Resources/Sprites/Walls.png" id="4_f63rn"]
+[ext_resource type="PackedScene" uid="uid://crwxeyhj0ntnt" path="res://scenes/player.tscn" id="5_rp28y"]
 [ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="6_crfhr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5v1tr"]
-texture = ExtResource("2_kjrqm")
+texture = ExtResource("3_bmqp6")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -270,7 +270,7 @@ texture = ExtResource("2_kjrqm")
 sources/1 = SubResource("TileSetAtlasSource_5v1tr")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kjrqm"]
-texture = ExtResource("3_d6w1m")
+texture = ExtResource("4_f63rn")
 2:0/0 = 0
 3:0/0 = 0
 6:0/0 = 0
@@ -406,7 +406,7 @@ tile_floor = NodePath("Floor_layer")
 tile_wall = NodePath("Wall_layer")
 current_state = 1
 
-[node name="Enemy2" parent="." unique_id=172947941 instance=ExtResource("5_rp28y")]
+[node name="Enemy2" parent="." unique_id=172947941 instance=ExtResource("2_kjrqm")]
 position = Vector2(138, -149)
 
 [node name="Floor_layer" type="TileMapLayer" parent="." unique_id=1447482499]
@@ -419,14 +419,14 @@ z_index = -1
 tile_map_data = PackedByteArray("AAD///z/AQABAAcAAAD///3/AQABAAgAAAD///7/AQABAAcAAAD/////AQABAAgAAAAAAP//AQACAAoAAAD///j/AQABAAcAAAD///n/AQABAAgAAAD///r/AQABAAcAAAD///v/AQABAAgAAAAPAP//AQADAAoAAAAQAPr/AQAIAAkAAAAQAPv/AQAIAAgAAAAQAPz/AQAIAAkAAAAQAP3/AQAIAAgAAAAQAP7/AQAIAAkAAAAQAP//AQAIAAoAAAAQAPj/AQAIAAkAAAAQAPn/AQAIAAgAAAD///b/AQABAAkAAAD///f/AQABAAkAAAABAP//AQACAAoAAAACAP//AQACAAoAAAADAP//AQADAAoAAAAEAP//AQACAAoAAAAFAP//AQADAAoAAAAGAP//AQACAAoAAAAHAP//AQADAAoAAAAIAP//AQACAAoAAAAJAP//AQADAAoAAAAKAP//AQACAAoAAAALAP//AQADAAoAAAAMAP//AQACAAoAAAANAP//AQADAAoAAAAOAP//AQACAAoAAAAQAPb/AQAIAAkAAAAQAPf/AQAIAAgAAAD///X/AQABAAgAAAD///T/AQABAAcAAAD///H/AQABAAcAAAD///L/AQABAAgAAAD///P/AQABAAkAAAD//+7/AQABAAcAAAD//+//AQABAAgAAAD///D/AQABAAkAAAAQAPT/AQAIAAcAAAAQAPX/AQAIAAgAAAAQAPH/AQAIAAcAAAAQAPL/AQAIAAgAAAAQAPP/AQAIAAkAAAAQAO7/AQAIAAcAAAAQAO//AQAIAAgAAAAQAPD/AQAIAAkAAAD//+3/AQABAAYAAAAAAO3/AQACAAYAAAABAO3/AQADAAYAAAACAO3/AQACAAYAAAADAO3/AQADAAYAAAAEAO3/AQACAAYAAAAFAO3/AQADAAYAAAAGAO3/AQACAAYAAAAHAO3/AQADAAYAAAAIAO3/AQACAAYAAAAJAO3/AQADAAYAAAAKAO3/AQACAAYAAAALAO3/AQADAAYAAAAMAO3/AQACAAYAAAANAO3/AQADAAYAAAAOAO3/AQACAAYAAAAPAO3/AQAHAAYAAAAQAO3/AQAIAAYAAAAEAPP/AQAGAAYAAAAEAPT/AQAGAAcAAAAFAPP/AQAHAAYAAAAFAPT/AQAHAAcAAAAGAPP/AQAGAAYAAAAGAPT/AQAGAAcAAAAHAPP/AQAHAAYAAAAHAPT/AQAHAAcAAAAIAPP/AQAGAAYAAAAIAPT/AQAGAAcAAAAJAPP/AQAHAAYAAAAJAPT/AQAHAAcAAAALAPX/AQAEAAYAAAALAPb/AQAEAAcAAAALAPf/AQAEAAgAAAALAPj/AQAEAAkAAAAMAPX/AQAFAAYAAAAMAPb/AQAFAAcAAAAMAPf/AQAFAAgAAAAMAPj/AQAFAAkAAAACAPf/AQAEAAYAAAACAPj/AQAEAAcAAAACAPn/AQAEAAgAAAACAPr/AQAEAAkAAAADAPf/AQAFAAYAAAADAPj/AQAFAAcAAAADAPn/AQAFAAgAAAADAPr/AQAFAAkAAAALAO//AQAEAAYAAAALAPD/AQAEAAcAAAALAPH/AQAEAAgAAAALAPL/AQAEAAkAAAAMAO//AQAFAAYAAAAMAPD/AQAFAAcAAAAMAPH/AQAFAAgAAAAMAPL/AQAFAAkAAAAKAPr/AQAEAAYAAAAKAPv/AQAEAAcAAAAKAPz/AQAEAAgAAAAKAP3/AQAEAAkAAAALAPr/AQAFAAYAAAALAPv/AQAFAAcAAAALAPz/AQAFAAgAAAALAP3/AQAFAAkAAAA=")
 tile_set = SubResource("TileSet_dqkch")
 
-[node name="Player" parent="." unique_id=889161630 instance=ExtResource("4_f63rn")]
+[node name="Player" parent="." unique_id=889161630 instance=ExtResource("5_rp28y")]
 position = Vector2(204, -48)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1721868400]
 position = Vector2(27, 1)
 zoom = Vector2(5, 5)
 
-[node name="Enemy" parent="." unique_id=932893547 node_paths=PackedStringArray("stage_mg") instance=ExtResource("5_rp28y")]
+[node name="Enemy" parent="." unique_id=932893547 node_paths=PackedStringArray("stage_mg") instance=ExtResource("2_kjrqm")]
 position = Vector2(75, -57)
 stats = SubResource("Resource_jpyye")
 patrol_point = Array[Vector2i]([Vector2i(3, 0)])

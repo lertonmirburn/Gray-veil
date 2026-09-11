@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://bsp31bcdw82ey"]
 
-[ext_resource type="Script" uid="uid://cb4w7s03ib1tq" path="res://scripts/enemy.gd" id="1_m1htj"]
-[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="2_mpr68"]
-[ext_resource type="Texture2D" uid="uid://2kkvswadw8xy" path="res://assets/entity/fog-soldier.png" id="3_xeo28"]
+[ext_resource type="Script" uid="uid://cb4w7s03ib1tq" path="res://scripts/enemy.gd" id="1_mpr68"]
+[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="2_ft8do"]
+[ext_resource type="Texture2D" uid="uid://2kkvswadw8xy" path="res://assets/entity/fog-soldier.png" id="3_5wwv6"]
 
 [sub_resource type="Resource" id="Resource_qhqgy"]
-script = ExtResource("2_mpr68")
+script = ExtResource("2_ft8do")
 metadata/_custom_type_script = "uid://ds0s1gcj1oy7t"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpr8r"]
-atlas = ExtResource("3_xeo28")
+atlas = ExtResource("3_5wwv6")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bhunq"]
@@ -27,11 +27,11 @@ animations = [{
 size = Vector2(16, 18)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=172947941]
-script = ExtResource("1_m1htj")
+script = ExtResource("1_mpr68")
 stats = SubResource("Resource_qhqgy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1214884076]
-position = Vector2(-2, -1)
+position = Vector2(-10, -8)
 scale = Vector2(0.605, 0.605)
 sprite_frames = SubResource("SpriteFrames_bhunq")
 frame_progress = 0.09958546
