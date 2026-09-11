@@ -1,9 +1,10 @@
 extends CharacterBody2D
 class_name Enemy
 
-signal enemy_turn_finished
+
 
 const TILE_SIZE: float = 16.0
+const tile_size: Vector2=Vector2(16,16)
 
 @export var stats: EntityStats
 @export var patrol_point: Array[Vector2i] = []
@@ -16,12 +17,13 @@ var value_noise: int
 var has_target: bool = false
 var grid_pos: Vector2i
 var last_dir: Vector2i = Vector2i.ZERO
-
+var current_ap:int
 @export var stage_mg: Stage_management
 
 func _ready() -> void:
-	global_position = global_position.snapped(Vector2(TILE_SIZE, TILE_SIZE))
-	grid_pos = Vector2i(int(global_position.x / TILE_SIZE), int(global_position.y / TILE_SIZE))
+	var tile_coord = (global_position / tile_size).floor()
+	global_position = (tile_coord * tile_size)
+	grid_pos = Vector2i(tile_coord)
 
 func initialize(stage_management: Stage_management) -> void:
 	stage_mg = stage_management
@@ -36,11 +38,17 @@ func on_hear_noise(source: Node, sound_pos: Vector2i, noise: int) -> void:
 	has_target = true
 
 func action(current_weather: Stage_management.WEATHER) -> void:
-	match current_weather:
-		Stage_management.WEATHER.FOG:
-			await behavior_foggy()
-		Stage_management.WEATHER.CLEAR:
+	print("Enemy turn")
+	if current_weather ==Stage_management.WEATHER.FOG:
+		await get_tree().physics_frame
+	else:
+		print("MOve")
+		if stats:
+			current_ap = stats.ap
+		while current_ap >= 0:
+			current_ap-=1
 			await behavier_clear_sky()
+		await get_tree().physics_frame
 	end_turn()
 
 func move(target_cell: Vector2i) -> void:
@@ -82,23 +90,17 @@ func attack(target: Player) -> void:
 	await get_tree().create_timer(0.2).timeout
 
 func behavior_foggy() -> void:
-	if has_target:
-		if grid_pos == pos_save:
-			has_target = false
-			await random_move()
-		else:
-			await chase_or_attack_target(pos_save)
-	else:
-		await random_move()
-
+	
+	pass
 func behavier_clear_sky() -> void:
 	if not (stage_mg and stage_mg.astar):
 		return
 		
 	var player_node = find_player_in_sight(3)
 	if player_node != null:
+		print("Has target")
 		has_target = true
-		pos_save = stage_mg.get_entity_grid_pos(player_node)
+		pos_save = player_node.grid_pos
 		await chase_or_attack_target(pos_save)
 		return
 		
@@ -106,17 +108,19 @@ func behavier_clear_sky() -> void:
 		if grid_pos == pos_save:
 			has_target = false
 			await random_move()
+			return
 		else:
 			await chase_or_attack_target(pos_save)
 			return
 			
 	await random_move()
 
+
 func find_player_in_sight(range_step: int) -> Player:
 	if not (stage_mg and stage_mg.player):
 		return null
 		
-	var player_cell: Vector2i = stage_mg.get_entity_grid_pos(stage_mg.player)
+	var player_cell: Vector2i = stage_mg.player.grid_pos
 	var dist_x: int = abs(grid_pos.x - player_cell.x)
 	var dist_y: int = abs(grid_pos.y - player_cell.y)
 	if dist_x + dist_y > range_step:
@@ -127,7 +131,9 @@ func find_player_in_sight(range_step: int) -> Player:
 	stage_mg.astar.set_point_solid(player_cell, false)
 
 	var path = stage_mg.astar.get_id_path(grid_pos, player_cell)
-	
+	print("Enemy cell: ", grid_pos, " | Player cell: ", player_cell)
+	print("Khoảng cách Manhattan: ", dist_x + dist_y, " | Tầm quét: ", range_step)
+	print("Độ dài path tìm được: ", path.size(), " | Chi tiết path: ", path)
 	stage_mg.astar.set_point_solid(grid_pos, true)
 	if was_target_solid:
 		stage_mg.astar.set_point_solid(player_cell, true)
@@ -171,4 +177,8 @@ func is_alive(node: Node) -> void:
 		on_die()
 
 func end_turn() -> void:
-	enemy_turn_finished.emit()
+	await get_tree().physics_frame
+	BusStage.enemy_finish_turn.emit(self)
+	
+	return
+	
