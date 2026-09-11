@@ -22,7 +22,7 @@ var current_ap:int
 
 func _ready() -> void:
 	var tile_coord = (global_position / tile_size).floor()
-	global_position = (tile_coord * tile_size)
+	global_position = (tile_coord * tile_size) + (tile_size / 2.0)
 	grid_pos = Vector2i(tile_coord)
 
 func initialize(stage_management: Stage_management) -> void:
@@ -31,11 +31,11 @@ func initialize(stage_management: Stage_management) -> void:
 	if stage_mg:
 		stage_mg.mark_entity(self, grid_pos)
 
-func on_hear_noise(source: Node, sound_pos: Vector2i, noise: int) -> void:
-	actor = source
-	pos_save = sound_pos
-	value_noise = noise
-	has_target = true
+#func on_hear_noise(source: Node, sound_pos: Vector2i, noise: int) -> void:
+	#actor = source
+	#pos_save = sound_pos
+	#value_noise = noise
+	#has_target = true
 
 func action(current_weather: Stage_management.WEATHER) -> void:
 	print("Enemy turn")
@@ -55,7 +55,9 @@ func move(target_cell: Vector2i) -> void:
 	var old_cell: Vector2i = grid_pos
 	grid_pos = target_cell
 	
-	var target_pixel: Vector2 = Vector2(target_cell.x * TILE_SIZE, target_cell.y * TILE_SIZE)
+	
+	var target_pixel: Vector2 = (Vector2(target_cell) * TILE_SIZE) + Vector2(TILE_SIZE / 2.0, TILE_SIZE / 2.0)
+	
 	var tween: Tween = create_tween()
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.tween_property(self, "global_position", target_pixel, 0.185).set_trans(Tween.TRANS_SINE)
@@ -86,7 +88,7 @@ func random_move() -> void:
 		await get_tree().create_timer(0.05).timeout
 
 func attack(target: Player) -> void:
-	print(name, " tấn công Player!") 
+	
 	await get_tree().create_timer(0.2).timeout
 
 func behavior_foggy() -> void:
@@ -95,9 +97,8 @@ func behavier_clear_sky() -> void:
 	if not (stage_mg and stage_mg.astar):
 		return
 		
-	var player_node = find_player_in_sight(3)
+	var player_node = find_player_in_sight(5)
 	if player_node != null:
-		print("Has target")
 		has_target = true
 		pos_save = player_node.grid_pos
 		await chase_or_attack_target(pos_save)
@@ -115,32 +116,36 @@ func behavier_clear_sky() -> void:
 	await random_move()
 
 
-func find_player_in_sight(range_step: int) -> Player:
+func find_player_in_sight(max_range: int=5) -> Player:
 	if not (stage_mg and stage_mg.player):
 		return null
 		
 	var player_cell: Vector2i = stage_mg.player.grid_pos
-	var dist_x: int = abs(grid_pos.x - player_cell.x)
-	var dist_y: int = abs(grid_pos.y - player_cell.y)
-	if dist_x + dist_y > range_step:
+	var diff: Vector2i = player_cell - grid_pos
+	
+
+	if diff.x != 0 and diff.y != 0:
 		return null
 		
-	stage_mg.astar.set_point_solid(grid_pos, false)
-	var was_target_solid = stage_mg.astar.is_point_solid(player_cell)
-	stage_mg.astar.set_point_solid(player_cell, false)
 
-	var path = stage_mg.astar.get_id_path(grid_pos, player_cell)
-	print("Enemy cell: ", grid_pos, " | Player cell: ", player_cell)
-	print("Khoảng cách Manhattan: ", dist_x + dist_y, " | Tầm quét: ", range_step)
-	print("Độ dài path tìm được: ", path.size(), " | Chi tiết path: ", path)
-	stage_mg.astar.set_point_solid(grid_pos, true)
-	if was_target_solid:
-		stage_mg.astar.set_point_solid(player_cell, true)
+	var distance: int = abs(diff.x) + abs(diff.y)
+	if distance > max_range or distance == 0:
+		return null
 		
-	if path.size() > 1 and (path.size() - 1) <= range_step:
-		return stage_mg.player
+
+	var step_dir: Vector2i = Vector2i(sign(diff.x), sign(diff.y))
+	var check_cell: Vector2i = grid_pos + step_dir
+	
+	while check_cell != player_cell:
+
+		if not stage_mg.valid_move.has(check_cell):
+			return null
+		if stage_mg.astar.is_point_solid(check_cell):
+			return null
+		check_cell += step_dir
+
+	return stage_mg.player
 		
-	return null
 
 func chase_or_attack_target(target_cell: Vector2i) -> void:
 	stage_mg.astar.set_point_solid(grid_pos, false)
@@ -164,6 +169,12 @@ func chase_or_attack_target(target_cell: Vector2i) -> void:
 				await move(next_cell)
 			else:
 				await get_tree().create_timer(0.05).timeout
+func take_damage() -> void:
+
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color.RED, 0.08)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.08)
+	on_die()
 
 func on_die() -> void:
 	if stage_mg:
