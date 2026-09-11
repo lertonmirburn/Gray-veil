@@ -1,19 +1,38 @@
 [gd_scene format=3 uid="uid://bsp31bcdw82ey"]
 
-[ext_resource type="Script" uid="uid://cb4w7s03ib1tq" path="res://scripts/enemy.gd" id="1_m1htj"]
-[ext_resource type="Texture2D" uid="uid://ch2jar3n7rvgm" path="res://assets/world test/Simple_Chess_by_skyel/Black Pieces/spr_bishop_black.png" id="2_55jtl"]
-[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://scripts/EntityStats.gd" id="2_mpr68"]
+[ext_resource type="Script" uid="uid://cb4w7s03ib1tq" path="res://Scripts/enemy.gd" id="1_m1htj"]
+[ext_resource type="Script" uid="uid://ds0s1gcj1oy7t" path="res://Scripts/EntityStats.gd" id="2_mpr68"]
+[ext_resource type="Texture2D" uid="uid://2kkvswadw8xy" path="res://assets/entity/fog-soldier.png" id="3_xeo28"]
 
 [sub_resource type="Resource" id="Resource_qhqgy"]
 script = ExtResource("2_mpr68")
 metadata/_custom_type_script = "uid://ds0s1gcj1oy7t"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpr8r"]
+atlas = ExtResource("3_xeo28")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bhunq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpr8r")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_riqys"]
+
 [node name="Enemy" type="CharacterBody2D" unique_id=172947941]
 script = ExtResource("1_m1htj")
 stats = SubResource("Resource_qhqgy")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=27852815]
-z_index = 1
-texture_filter = 1
-position = Vector2(16, 16)
-texture = ExtResource("2_55jtl")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1214884076]
+scale = Vector2(0.605, 0.605)
+sprite_frames = SubResource("SpriteFrames_bhunq")
+frame_progress = 0.09958546
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1419341061]
+shape = SubResource("RectangleShape2D_riqys")
