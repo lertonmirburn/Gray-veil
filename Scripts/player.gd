@@ -2,9 +2,10 @@ extends CharacterBody2D
 class_name Player
 signal end_turn
 
-
-const tile_size: Vector2 = Vector2(16,16)
+const TILE_SIZE: Vector2 = Vector2(32,32)
 #var sprite_node_pos_tween: Tween
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var stats: EntityStats
 var current_ap: int = 0
@@ -40,16 +41,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		#return
 	var dir = Vector2.ZERO
 	#if Input.is_action_just_pressed("ui_up") and !$up.is_colliding():
-	if event.is_action_pressed("ui_up"):
+	if Input.is_action_just_pressed("ui_up"):
 		dir = Vector2(0,-1)
+		animated_sprite_2d.play("idle_back")
 	#elif Input.is_action_just_pressed("ui_down") and !$down.is_colliding():
-	elif event.is_action_pressed("ui_down"):	
+	elif Input.is_action_just_pressed("ui_down"):	
 		dir = Vector2(0,1)
+		animated_sprite_2d.play("idle_front")
 	#elif Input.is_action_just_pressed("ui_left") and !$left.is_colliding():
-	elif event.is_action_pressed("ui_left"):
+	elif Input.is_action_just_pressed("ui_left"):
 		dir = Vector2(-1,0)
+		animated_sprite_2d.flip_h = dir.x < 0
+		animated_sprite_2d.play("idle_right")
 	#elif Input.is_action_just_pressed("ui_right") and !$right.is_colliding():
-	elif event.is_action_pressed("ui_right"):	
+	elif Input.is_action_just_pressed("ui_right"):	
 		dir = Vector2(1,0)
 	if dir != Vector2.ZERO:
 		get_viewport().set_input_as_handled() 
@@ -102,5 +107,5 @@ func _execute_move(dir:Vector2):
 		BusStage.player_end_turn.emit()
 		
 func die() -> void:
-	BusStage.player_died.emit()
+	#BusStage.player_died.emit()
 	queue_free()

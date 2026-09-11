@@ -16,10 +16,6 @@ run/main_scene="uid://crwxeyhj0ntnt"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-BusStage="*uid://b1h1cjk4822kj"
-
 [display]
 
 window/stretch/mode="canvas_items"
@@ -31,6 +27,7 @@ window/stretch/aspect="expand"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

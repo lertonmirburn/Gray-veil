@@ -5,16 +5,16 @@
 [ext_resource type="Resource" uid="uid://cp763wadyd61i" path="res://Resources/player_stats.tres" id="2_6t5aa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bhunq"]
-size = Vector2(11, 12.5)
+size = Vector2(14, 23)
 
 [node name="Player" type="CharacterBody2D" unique_id=889161630]
 script = ExtResource("1_onrkg")
 stats = ExtResource("2_6t5aa")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=55194136]
-scale = Vector2(0.09765626, 0.10937503)
-texture = ExtResource("1_4flbx")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=289223263]
+sprite_frames = SubResource("SpriteFrames_bhunq")
+animation = &"attack_back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1644672056]
-position = Vector2(0, 1)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_bhunq")
