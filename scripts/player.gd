@@ -145,12 +145,9 @@ func _execute_move(dir:Vector2):
 	global_position += dir * tile_size
 	if stage_mg:
 		stage_mg.mark_entity_moved(self, old_grid_pos, grid_pos)
-	if movement_buff>1: 
-		movement_buff-=1
-	else:
-		current_ap-=1
-		print("Moved. AP left: ", current_ap, " | Now at : ", grid_pos)
-		#movement_buff = stats.movement_speed
+	current_ap-=1
+	print("Moved. AP left: ", current_ap, " | Now at : ", grid_pos)
+	movement_buff = stats.movement_speed
 	#$Sprite2D.global_position -= dir * tile_size
 	
 	#if sprite_node_pos_tween:

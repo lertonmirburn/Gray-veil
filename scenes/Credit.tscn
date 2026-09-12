@@ -81,14 +81,3 @@ text = "PIXEL FONTS BY PIX3M
 Author: Pix3M
 License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
 Source: https://opengameart.org/content/pixel-fonts-by-pix3m"
-
-[node name="Button" type="Button" parent="." unique_id=1295979435]
-offset_left = 1.0
-offset_top = 604.0
-offset_right = 84.0
-offset_bottom = 647.0
-theme_override_fonts/font = ExtResource("2_u8q48")
-theme_override_font_sizes/font_size = 40
-text = "Back"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
