@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crwxeyhj0ntnt"]
 
-[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://Scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Resource" uid="uid://cp763wadyd61i" path="res://Resources/player_stats.tres" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bo2opb6c0fln4" path="res://assets/entity/fog-prisoner.png" id="3_qlg0r"]
 
@@ -163,6 +163,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_riqys"]
 size = Vector2(12.75, 13.375)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sn0t7"]
+size = Vector2(30, 26)
+
 [node name="Player" type="CharacterBody2D" unique_id=889161630]
 script = ExtResource("1_qhqgy")
 stats = ExtResource("2_dqkch")
@@ -176,6 +179,7 @@ shape = SubResource("RectangleShape2D_bhunq")
 scale = Vector2(0.6054688, 0.6054688)
 sprite_frames = SubResource("SpriteFrames_bhunq")
 animation = &"aim_back"
+frame_progress = 0.46137285
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1794323306]
 position = Vector2(15, 0)
@@ -183,6 +187,18 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=529227633]
 shape = SubResource("RectangleShape2D_riqys")
+
+[node name="InteractableArea" type="Area2D" parent="." unique_id=1444388109]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea" unique_id=630129547]
+shape = SubResource("RectangleShape2D_sn0t7")
+
+[node name="Label" type="Label" parent="." unique_id=1866738142]
+offset_left = -19.0
+offset_top = -36.0
+offset_right = 21.0
+offset_bottom = -13.0
+theme_override_font_sizes/font_size = 3
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

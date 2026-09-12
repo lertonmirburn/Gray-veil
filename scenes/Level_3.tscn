@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ch7hcc4vgn824" path="res://assets/vehicles/police.png" id="9_qihl0"]
 [ext_resource type="Texture2D" uid="uid://cugvafy5py842" path="res://assets/vehicles/suv.png" id="10_u8kju"]
 [ext_resource type="Texture2D" uid="uid://e0eynrh3flgr" path="res://assets/vehicles/car.png" id="11_4k5pj"]
+[ext_resource type="PackedScene" uid="uid://beq272qfsxi5i" path="res://scenes/interactableArea.tscn" id="14_qihl0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fhfi4"]
 texture = ExtResource("3_o3dms")
@@ -227,3 +228,12 @@ position = Vector2(30, -193)
 
 [node name="Enemy4" parent="." unique_id=959964297 instance=ExtResource("2_r45rs")]
 position = Vector2(41, -244)
+
+[node name="Interactable" parent="." unique_id=428568019 instance=ExtResource("14_qihl0")]
+position = Vector2(458, -38)
+
+[node name="Interactable2" parent="." unique_id=816321416 instance=ExtResource("14_qihl0")]
+position = Vector2(107, -262)
+
+[node name="Interactable3" parent="." unique_id=1132152744 instance=ExtResource("14_qihl0")]
+position = Vector2(458, -277)

@@ -7,6 +7,8 @@ const tile_size: Vector2 = Vector2(16,16)
 #var sprite_node_pos_tween: Tween
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: Area2D = $Area2D
+@onready var item_message: Label = $Label
+
 @export var stats: EntityStats
 var current_ap: int = 0
 var is_my_turn: bool = false
@@ -17,10 +19,11 @@ var last_direction: Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var hitbox_offset: Vector2
 var mouse_pos = get_global_mouse_position()
+var collection: Array[String] = []
 
 func _ready() -> void:
 	current_ap = stats.ap
-	movement_buff = stats.movement_speed
+	movement_buff = 0
 	var tile_coord = (global_position / tile_size).floor()
 	global_position = (tile_coord * tile_size) + (tile_size / 2.0)
 	grid_pos = Vector2i(tile_coord)
@@ -88,7 +91,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		process_animation(dir)
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		attack()
-		
+	if event.is_action_pressed("interact"):
+		interact()
 	# Skip any movement if is_attacking
 	if is_attacking:
 		dir = Vector2.ZERO
@@ -146,7 +150,7 @@ func _execute_move(dir:Vector2):
 	else:
 		current_ap-=1
 		print("Moved. AP left: ", current_ap, " | Now at : ", grid_pos)
-		movement_buff = stats.movement_speed
+		#movement_buff = stats.movement_speed
 	#$Sprite2D.global_position -= dir * tile_size
 	
 	#if sprite_node_pos_tween:
@@ -206,6 +210,33 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		print(body)
 		BusStage.enemy_die.emit(body)
 		
+#-------------------------------------------------------------------------------
+# INTERACT
+#-------------------------------------------------------------------------------
+func interact() -> void:
+	var areas: Array[Area2D] = $InteractableArea.get_overlapping_areas()
+	
+	for area in areas:
+		print("AREA: ", area.name)
+		if area is Interactable:
+			area.interact()
+			return
+			
+func add_item(item: String) -> void:
+	collection.append(item)
+	
+	item_message.text = "License plate added: " + item
+	item_message.show()
+	await get_tree().create_timer(2.0).timeout
+	item_message.hide()
+	print("Collected: ", item)
+	
+func has_item(item_name: String) -> bool:
+	for item in collection:
+		if item == item_name:
+			return true
+
+	return false
 #-------------------------------------------------------------------------------
 # DEATH
 #-------------------------------------------------------------------------------
