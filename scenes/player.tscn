@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crwxeyhj0ntnt"]
 
-[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://Scripts/player.gd" id="1_qhqgy"]
+[ext_resource type="Script" uid="uid://cqcr1671qwrsy" path="res://scripts/player.gd" id="1_qhqgy"]
 [ext_resource type="Resource" uid="uid://cp763wadyd61i" path="res://Resources/player_stats.tres" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bo2opb6c0fln4" path="res://assets/entity/fog-prisoner.png" id="3_qlg0r"]
 

@@ -16,6 +16,8 @@ const TILE_SIZE: float = 16
 
 @export var show_debug_grid: bool = true
 
+
+
 var astar: AStarGrid2D = AStarGrid2D.new()
 var fog_counter: int = 0
 
@@ -91,16 +93,18 @@ func game_start() -> void:
 func game_loop() -> void:
 	while current_state != STATE.WINNING and current_state != STATE.GAME_OVER:
 		current_state = STATE.TURN_PLAYER
+		if current_weather== WEATHER.FOG:
+
+		else:
+
+
 		#4
 		player.action()
 		await BusStage.player_end_turn
 		if current_state == STATE.WINNING or current_state == STATE.GAME_OVER:
 			print(current_state)
 			break
-			
-
 		current_state = STATE.TURN_ENEMY
-		
 		for enemy in enemies.duplicate():
 			if not is_instance_valid(enemy):
 				continue
