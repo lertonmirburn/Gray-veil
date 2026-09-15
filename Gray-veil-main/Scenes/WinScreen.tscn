@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://5vcajay0jy7s"]
+
+[ext_resource type="Script" uid="uid://bg626ecuvext1" path="res://Scripts/win_screen.gd" id="1_q8i45"]
+[ext_resource type="FontFile" uid="uid://bj36fkcjco66h" path="res://assets/font_Pix3M_ccby/alagard_by_pix3m-d6awiwp.ttf" id="2_jrum5"]
+[ext_resource type="FontFile" uid="uid://dxogm5ag3etft" path="res://assets/font_Pix3M_ccby/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="3_f4f3g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orua6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jpyye"]
+font = ExtResource("2_jrum5")
+font_size = 93
+font_color = Color(0, 1, 0, 1)
+
+[node name="WinScreen" type="CanvasLayer" unique_id=1491334614]
+script = ExtResource("1_q8i45")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=199686228]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_orua6")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1901234124]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1154066703]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=909534209]
+layout_mode = 2
+text = "YOU WIN"
+label_settings = SubResource("LabelSettings_jpyye")
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=406995136]
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=927878241]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Continue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=2043690777]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_f4f3g")
+theme_override_font_sizes/font_size = 36
+text = "CONTINUE"
+
+[node name="Return_menu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1714576397]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_f4f3g")
+theme_override_font_sizes/font_size = 36
+text = "RETURN TO MAIN MENU"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Return_menu" to="." method="_on_return_menu_pressed"]
